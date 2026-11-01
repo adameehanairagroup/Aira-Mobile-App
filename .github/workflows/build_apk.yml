@@ -38,30 +38,35 @@ jobs:
 
       - name: Prepare APK File
         run: |
-          cp build/app/outputs/flutter-apk/app-release.apk Aira-AI-v1.0.0.apk
-          ls -lh Aira-AI-v1.0.0.apk
+          cp build/app/outputs/flutter-apk/app-release.apk Aira-AI-v1.0.1.apk
+          ls -lh Aira-AI-v1.0.1.apk
 
       - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Aira-AI-Release-APK
-          path: Aira-AI-v1.0.0.apk
+          path: Aira-AI-v1.0.1.apk
           retention-days: 30
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
         with:
-          tag_name: v1.0.0
-          name: "Aira AI v1.0.0 Official Release APK"
+          tag_name: v1.0.1
+          name: "Aira AI v1.0.1 Official Release APK (New Sovereign Logo)"
           body: |
-            ### 🚀 Aira AI — Official Android Mobile App (Engine v3.6)
+            ### 🚀 Aira AI — Official Android Mobile App v1.0.1 (Engine v3.6)
             **Sovereign Intelligence engineered by Er. Adam Eehan for Aira Group of Technology.**
 
+            #### 🎨 What's New in v1.0.1:
+            - **New Official Brand Logo**: Featuring the new sovereign Aira icon with cosmic gradient and intelligence spark flare!
+            - Updated Android launcher icon (standard and round adaptive variants).
+            - Updated splash screen branding.
+
             #### 📲 Download & Install:
-            - Download `Aira-AI-v1.0.0.apk` below directly to your Android device and install.
+            - Download `Aira-AI-v1.0.1.apk` below directly to your Android device and install.
             - Full microphone & camera permissions for Sovereign Live Voice and multimodal chat.
             - 100% synchronized with the live Aira WebChat ecosystem.
-          files: Aira-AI-v1.0.0.apk
+          files: Aira-AI-v1.0.1.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

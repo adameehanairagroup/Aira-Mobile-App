@@ -2,7 +2,7 @@ name: aira_ai
 description: "Aira AI — Sovereign Intelligence Mobile App engineered by Er. Adam Eehan for Aira Group of Technology."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ^3.5.0
