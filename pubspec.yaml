@@ -1,0 +1,31 @@
+name: aira_ai
+description: "Aira AI — Sovereign Intelligence Mobile App engineered by Er. Adam Eehan for Aira Group of Technology."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  webview_flutter: ^4.10.0
+  webview_flutter_android: ^3.16.9
+  permission_handler: ^11.3.1
+  url_launcher: ^6.3.1
+  flutter_spinkit: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/app_icon.png
+    - assets/images/splash_logo.png
