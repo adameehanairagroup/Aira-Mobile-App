@@ -108,7 +108,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
       
       // Auto-grant Camera and Microphone permissions for Voice chat & Image attachments
       androidController.setOnPlatformPermissionRequest(
-        (PlatformWebViewPermissionRequest request) {
+        (request) {
           request.grant();
         },
       );
