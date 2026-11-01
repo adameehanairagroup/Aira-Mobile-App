@@ -1,0 +1,67 @@
+name: Build Aira AI APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Compile Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build Release APK
+        run: flutter build apk --release
+
+      - name: Prepare APK File
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk Aira-AI-v1.0.0.apk
+          ls -lh Aira-AI-v1.0.0.apk
+
+      - name: Upload APK as Workflow Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aira-AI-Release-APK
+          path: Aira-AI-v1.0.0.apk
+          retention-days: 30
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
+        with:
+          tag_name: v1.0.0
+          name: "Aira AI v1.0.0 Official Release APK"
+          body: |
+            ### 🚀 Aira AI — Official Android Mobile App (Engine v3.6)
+            **Sovereign Intelligence engineered by Er. Adam Eehan for Aira Group of Technology.**
+
+            #### 📲 Download & Install:
+            - Download `Aira-AI-v1.0.0.apk` below directly to your Android device and install.
+            - Full microphone & camera permissions for Sovereign Live Voice and multimodal chat.
+            - 100% synchronized with the live Aira WebChat ecosystem.
+          files: Aira-AI-v1.0.0.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
